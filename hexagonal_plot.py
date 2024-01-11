@@ -45,7 +45,7 @@ def plot_hexagonal_grid_simpel(data, grid_size=(20, 20), colormap='viridis', tit
     plt.colorbar(plt.cm.ScalarMappable(cmap=colormap), ax=ax)
     plt.show()
 
-def plot_hexagonal_grid(data, grid_size=(20, 20), colormap='viridis', title=None, show_axes=True, label_fontsize=8, label_weight='bold', labels=None):
+def plot_hexagonal_grid((data, grid_size=(20, 20), colormap='viridis', title=None, show_axes=True, label_fontsize=8, label_weight='bold', labels=None, label_color='white'):
     """
     Plottet ein sechseckiges Gitter mit optionalen Labels auf bestimmten Zellen.
 
@@ -57,6 +57,7 @@ def plot_hexagonal_grid(data, grid_size=(20, 20), colormap='viridis', title=None
     :param label_fontsize: Schriftgröße für die Labels.
     :param label_weight: Schriftstärke für die Labels.
     :param labels: Optional. Dictionary, das Indizes (als Schlüssel) und Textlabels (als Werte) enthält.
+    :param label_color: Farbe der Textlabels.
     """
     # Überprüfung der Eingabeparameter
     if not isinstance(data, np.ndarray):
@@ -69,6 +70,8 @@ def plot_hexagonal_grid(data, grid_size=(20, 20), colormap='viridis', title=None
         raise ValueError("Parameter 'label_fontsize' muss eine positive Zahl sein.")
     if not isinstance(label_weight, str):
         raise ValueError("Parameter 'label_weight' muss ein String sein.")
+    if not (isinstance(label_color, str) or isinstance(label_color, tuple)):
+        raise ValueError("Parameter 'label_color' muss ein String oder ein Tuple sein, das eine Farbe repräsentiert.")
 
     fig, ax = plt.subplots()
     ax.set_aspect('equal')
@@ -95,7 +98,7 @@ def plot_hexagonal_grid(data, grid_size=(20, 20), colormap='viridis', title=None
 
             # Fügt das Label hinzu, wenn vorhanden und gültig
             if labels and index in labels:
-                ax.text(x, y, labels[index], ha='center', va='center', fontsize=label_fontsize, fontweight=label_weight)
+                ax.text(x, y, labels[index], ha='center', va='center', fontsize=label_fontsize, fontweight=label_weight, color=label_color)
 
     # Fügt einen Titel hinzu, wenn einer angegeben ist
     if title:
