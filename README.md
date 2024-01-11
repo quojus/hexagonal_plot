@@ -38,7 +38,7 @@ plot_hexagonal_axial(data_normal, title="Axialkoordinaten-Diagramm")
 ```
 
 
-Installation
+## Installation
 
 Sie können das Modul direkt von GitHub installieren. Stellen Sie sicher, dass Sie über die neueste Version von pip verfügen.
 Installation mit pip
