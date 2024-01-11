@@ -22,3 +22,11 @@ data = np.random.rand(grid_size[0] * grid_size[1])  # Erzeugt zufällige Daten f
 plot_hexagonal_grid(data, grid_size, title='Mein Hexagonales Gitter', show_axes=False)
 ```
 
+
+Beispiel für die Verwendung der Funktion ohne Labels:
+```python
+grid_size = (20, 20)
+data = np.random.rand(grid_size[0] * grid_size[1])  # Erzeugt zufällige Daten für das Gitter
+labels = {0: 'A', 25: 'B', 50: 'C'}  # Beispiel-Labels
+plot_hexagonal_grid_with_labels(data, grid_size, title='Gitter mit Labels', show_axes=False, labels=labels)
+```
