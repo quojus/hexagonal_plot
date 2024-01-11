@@ -7,8 +7,7 @@ setup(
     description='Dieses Skript enthält eine Funktion plot_hexagonal_grid, die es ermöglicht, Daten in einem sechseckigen Gitter mit Matplotlib zu visualisieren.',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    author='Falk',
-    author_email='falk.ojus@proton.me',
+    author='Falk mit gpt',
     url='https://github.com/quojus/hexagonal_plot',
         install_requires=[
         'matplotlib',
