@@ -11,8 +11,7 @@ setup(
     url='https://github.com/quojus/hexagonal_plot',
         install_requires=[
         'matplotlib',
-        'numpy',
-        'random'
+        'numpy'
     ],
     python_requires='>=3.6',
 )
