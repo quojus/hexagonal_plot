@@ -30,3 +30,24 @@ data = np.random.rand(grid_size[0] * grid_size[1])  # Erzeugt zufällige Daten f
 labels = {0: 'A', 25: 'B', 50: 'C'}  # Beispiel-Labels
 plot_hexagonal_grid_with_labels(data, grid_size, title='Gitter mit Labels', show_axes=False, labels=labels)
 ```
+
+
+Installation
+
+Sie können das Modul direkt von GitHub installieren. Stellen Sie sicher, dass Sie über die neueste Version von pip verfügen.
+Installation mit pip
+
+Um das Modul mit pip zu installieren, führen Sie den folgenden Befehl in Ihrem Terminal aus:
+```bash
+pip install git+https://github.com/IhrBenutzername/IhrRepository.git
+```
+Ersetzen Sie IhrBenutzername und IhrRepository durch Ihren GitHub-Benutzernamen und den Namen Ihres Repositories.
+Installation mit Conda
+
+Für die Installation mit Conda müssen Sie zuerst ein Conda-Paket erstellen und es auf einem Conda-Kanal wie Anaconda Cloud oder conda-forge hosten. Sobald Ihr Paket gehostet wird, können Sie es mit dem folgenden Befehl installieren:
+
+```bash
+conda install -c IhrKanal IhrPaket
+```
+Ersetzen Sie IhrKanal durch den Namen Ihres Conda-Kanals und IhrPaket durch den Namen Ihres Pakets.
+
