@@ -5,47 +5,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.patches as mpatches
 
-def plot_hexagonal_grid_simpel(data, grid_size=(20, 20), colormap='viridis', title=None, show_axes=True):
-    """
-    Plottet ein sechseckiges Gitter basierend auf den übergebenen Daten.
 
-    :param data: Array von Werten, die jedem Sechseck zugeordnet sind (Flache Liste oder 1D Numpy-Array).
-    :param grid_size: Die Größe des Gitters (Zeilen, Spalten).
-    :param colormap: Farbschema für die Plots.
-    :param title: Titel für das Diagramm.
-    :param show_axes: Bestimmt, ob die Achsen angezeigt werden sollen.
-    """
-    fig, ax = plt.subplots()
-    ax.set_aspect('equal')
-
-    # Versteckt die Achsen, wenn show_axes False ist
-    if not show_axes:
-        ax.axis('off')
-
-    # Berechnet den Radius eines Sechsecks basierend auf der Gittergröße
-    radius = 1 / np.sqrt(grid_size[0]**2 + grid_size[1]**2)
-
-    # Erstellt jedes Sechseck
-    for row in range(grid_size[0]):
-        for col in range(grid_size[1]):
-            x = col * 1.5 * radius
-            y = row * np.sqrt(3) * radius + (col % 2) * radius * np.sqrt(3) / 2
-            
-            hexagon = mpatches.RegularPolygon((x, y), numVertices=6, radius=radius, 
-                                               orientation=np.radians(30),
-                                               facecolor=plt.cm.get_cmap(colormap)(data[row * grid_size[1] + col]),
-                                               edgecolor='k')
-            ax.add_patch(hexagon)
-
-    # Fügt einen Titel hinzu, wenn einer angegeben ist
-    if title:
-        plt.title(title)
-
-    ax.autoscale_view()
-    plt.colorbar(plt.cm.ScalarMappable(cmap=colormap), ax=ax)
-    plt.show()
-
-def plot_hexagonal_grid((data, grid_size=(20, 20), colormap='viridis', title=None, show_axes=True, label_fontsize=8, label_weight='bold', labels=None, label_color='white'):
+def plot_hexagonal_grid(data, grid_size=(20, 20), colormap='viridis', title=None, show_axes=True, label_fontsize=8,
+                        label_weight='bold', labels=None):
     """
     Plottet ein sechseckiges Gitter mit optionalen Labels auf bestimmten Zellen.
 
@@ -57,7 +19,6 @@ def plot_hexagonal_grid((data, grid_size=(20, 20), colormap='viridis', title=Non
     :param label_fontsize: Schriftgröße für die Labels.
     :param label_weight: Schriftstärke für die Labels.
     :param labels: Optional. Dictionary, das Indizes (als Schlüssel) und Textlabels (als Werte) enthält.
-    :param label_color: Farbe der Textlabels.
     """
     # Überprüfung der Eingabeparameter
     if not isinstance(data, np.ndarray):
@@ -70,8 +31,6 @@ def plot_hexagonal_grid((data, grid_size=(20, 20), colormap='viridis', title=Non
         raise ValueError("Parameter 'label_fontsize' muss eine positive Zahl sein.")
     if not isinstance(label_weight, str):
         raise ValueError("Parameter 'label_weight' muss ein String sein.")
-    if not (isinstance(label_color, str) or isinstance(label_color, tuple)):
-        raise ValueError("Parameter 'label_color' muss ein String oder ein Tuple sein, das eine Farbe repräsentiert.")
 
     fig, ax = plt.subplots()
     ax.set_aspect('equal')
@@ -81,7 +40,10 @@ def plot_hexagonal_grid((data, grid_size=(20, 20), colormap='viridis', title=Non
         ax.axis('off')
 
     # Berechnet den Radius eines Sechsecks basierend auf der Gittergröße
-    radius = 1 / np.sqrt(grid_size[0]**2 + grid_size[1]**2)
+    radius = 1 / np.sqrt(grid_size[0] ** 2 + grid_size[1] ** 2)
+    # Berechnet den minimalen und maximalen Wert in den Daten für die Farbskala
+    vmin = np.min(data)
+    vmax = np.max(data)
 
     # Erstellt jedes Sechseck und fügt Labels hinzu
     for row in range(grid_size[0]):
@@ -89,22 +51,21 @@ def plot_hexagonal_grid((data, grid_size=(20, 20), colormap='viridis', title=Non
             x = col * 1.5 * radius
             y = row * np.sqrt(3) * radius + (col % 2) * radius * np.sqrt(3) / 2
             index = row * grid_size[1] + col
-
-            hexagon = mpatches.RegularPolygon((x, y), numVertices=6, radius=radius, 
-                                               orientation=np.radians(30),
-                                               facecolor=plt.cm.get_cmap(colormap)(data[index]),
-                                               edgecolor='k')
+            hexagon = mpatches.RegularPolygon((x, y), numVertices=6, radius=radius,
+                                              orientation=np.radians(30),
+                                              facecolor=plt.cm.get_cmap(colormap)((data[index]-vmin)/(vmax-vmin)),
+                                              edgecolor='k')
             ax.add_patch(hexagon)
 
             # Fügt das Label hinzu, wenn vorhanden und gültig
             if labels and index in labels:
-                ax.text(x, y, labels[index], ha='center', va='center', fontsize=label_fontsize, fontweight=label_weight, color=label_color)
+                ax.text(x, y, labels[index], ha='center', va='center', fontsize=label_fontsize, fontweight=label_weight)
 
     # Fügt einen Titel hinzu, wenn einer angegeben ist
     if title:
         plt.title(title)
 
     ax.autoscale_view()
-    plt.colorbar(plt.cm.ScalarMappable(cmap=colormap), ax=ax)
+    plt.colorbar(plt.cm.ScalarMappable(cmap=colormap, norm=plt.Normalize(vmin=vmin, vmax=vmax)), ax=ax)
     plt.show()
 
