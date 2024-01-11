@@ -41,8 +41,7 @@ Um das Modul mit pip zu installieren, führen Sie den folgenden Befehl in Ihrem 
 ```bash
 pip install git+https://github.com/quojus/hexagonal_plot.git
 ```
-Ersetzen Sie IhrBenutzername und IhrRepository durch Ihren GitHub-Benutzernamen und den Namen Ihres Repositories.
-Installation mit Conda
+
 
 
 
