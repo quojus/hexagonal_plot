@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='hexagonal_plot',
-    version='1.0.1',
+    version='1.0.2',
     packages=find_packages(),
     description='Dieses Skript enthält eine Funktion plot_hexagonal_grid, die es ermöglicht, Daten in einem sechseckigen Gitter mit Matplotlib zu visualisieren.',
     long_description=open('README.md').read(),
