@@ -14,7 +14,11 @@ import numpy as np
 grid_size = (20, 20)
 data = np.random.rand(grid_size[0] * grid_size[1])
 plot_hexagonal_grid(data, grid_size)
-
-
-
+```
+Beispiel 2:
+```python
+grid_size = (20, 20)
+data = np.random.rand(grid_size[0] * grid_size[1])  # Erzeugt zufällige Daten für das Gitter
+plot_hexagonal_grid(data, grid_size, title='Mein Hexagonales Gitter', show_axes=False)
+```
 
